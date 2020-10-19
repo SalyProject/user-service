@@ -1,0 +1,24 @@
+steps:
+  - id: build-test-image
+    name: gcr.io/cloud-builders/docker
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        docker image build --target build --tag user-service:test .
+  - id: run-tests
+    name: gcr.io/cloud-builders/docker
+    entrypoint: bash
+    args:
+      - -c
+      - |
+      docker container run user-service:test mvn test jacoco:report coveralls:report -DrepoToken=<myRepoToken>
+  - id: build-app
+    name: gcr.io/cloud-builders/docker
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        docker image build --tag gcr.io/${PROJECT_ID}/user-service:${$BRANCH_NAME}-${COMMIT_SHA}
+  images:
+    - gcr.io/${PROJECT_ID}/user-service:${$BRANCH_NAME}-${COMMIT_SHA}
