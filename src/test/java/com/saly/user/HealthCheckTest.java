@@ -17,15 +17,6 @@ public class HealthCheckTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    void testHealthy() {
-        final ResponseEntity<ActuatorHealth> response = restTemplate.getForEntity("/actuator/health", ActuatorHealth.class);
-
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody()).isNotNull();
-        assertThat(response.getBody().getStatus()).isEqualTo("UP");
-    }
-
-    @Test
     void testGitInfoExist() {
         final ResponseEntity<ActuatorInfo> response = restTemplate.getForEntity("/actuator/info", ActuatorInfo.class);
 
