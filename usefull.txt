@@ -1,0 +1,2 @@
+docker build --target build -t saly-user-service-build .
+docker container run saly-user-service-build mvn test jacoco:report coveralls:report -DrepoToken=<myRepoToken>

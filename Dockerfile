@@ -7,10 +7,12 @@ COPY ./pom.xml ./pom.xml
 RUN mvn dependency:go-offline -B
 
 # copy your other files
+# .git folder needs for providing info for actuator
+COPY ./.git ./.git
 COPY ./src ./src
 
 # build for release
-RUN mvn package -Dmaven.test.skip=true
+RUN mvn install -Dmaven.test.skip=true
 
 FROM amazoncorretto:11
 
