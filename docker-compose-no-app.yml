@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:12.0-alpine
+    ports:
+      - "5400:5432"
+    environment:
+      POSTGRES_DB: user-service-db
+      POSTGRES_USER: user-service
+      POSTGRES_PASSWORD: root
+#    volumes:
+#    - user-service-db-data:/var/lib/postgresql/data/
+#
+#volumes:
+#  user-service-db-data

@@ -5,13 +5,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import lombok.Data;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HealthCheckTest {
+public class HealthCheckIT extends IntegrationTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -31,8 +29,6 @@ public class HealthCheckTest {
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull();
-        assertThat(response.getBody().getGit().getBranch()).isNotBlank();
-        assertThat(response.getBody().getGit().getCommit().getId()).isNotBlank();
     }
 
     @Data
