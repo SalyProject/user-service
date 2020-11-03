@@ -1,7 +1,8 @@
-package com.saly.user;
+package com.saly.user.service.customer;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -10,4 +11,6 @@ public class Customer {
     private String name;
     private String lastName;
     private String email;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

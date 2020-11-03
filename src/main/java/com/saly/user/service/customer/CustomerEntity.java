@@ -1,7 +1,9 @@
-package com.saly.user;
+package com.saly.user.service.customer;
 
+import com.saly.user.service.user.UserEntity;
 import com.saly.user.common.domain.AbstractEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name = "customer")
+@EqualsAndHashCode(callSuper = true)
 public class CustomerEntity extends AbstractEntity<CustomerEntity> {
     @Column(name = "name")
     private String name;

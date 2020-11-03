@@ -8,10 +8,10 @@ import java.util.Objects;
 
 @Getter
 public abstract class HasError extends RuntimeException {
-    private ApiErrorCode errorCode;
-    private String errorMessage;
+    private final ApiErrorCode errorCode;
+    private final String errorMessage;
     private final String debugInfo;
-    private boolean printStackTrace;
+    private final boolean printStackTrace;
 
     protected HasError(ApiErrorCode errorCode, String debugInfo, Throwable cause) {
         super(buildMessage(errorCode, debugInfo, cause), cause);

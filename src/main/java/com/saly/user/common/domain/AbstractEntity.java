@@ -9,6 +9,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.function.Function;
 
@@ -19,16 +20,20 @@ import static java.util.Optional.ofNullable;
 public abstract class AbstractEntity<Entity extends AbstractEntity<Entity>> implements Serializable {
 
     @Id
-    @Type(type = "uuid-char")
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator",
-            parameters = {@Parameter(name = "uuid_gen_strategy_class", value = "org.hibernate.id.uuid.CustomVersionOneStrategy")}
-    )
-    @Column(name = "id")
     @Setter
+    @Column(name = "id")
+    @GeneratedValue
     private UUID id;
+
+    @Getter
+    @Setter
+    @Column(name = "created_at")
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    @Getter
+    @Setter
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
     @Transient
     private ID<Entity> pkid;

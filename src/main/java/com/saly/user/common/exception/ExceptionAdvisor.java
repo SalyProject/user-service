@@ -10,6 +10,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
@@ -23,6 +24,12 @@ public class ExceptionAdvisor implements ResponseBodyAdvice<Object> {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ResultError<Object>> handleAll(final HttpServletRequest request, final Throwable e) {
         final ResultError<Object> error = ResultError.of(ErrorCode.INTERNAL_ERROR, e, request);
+        return new ResponseEntity<>(error, error.getHttpStatus());
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ResultError<Object>> handleAccessDenied(final HttpServletRequest request, final AccessDeniedException e) {
+        final ResultError<Object> error = ResultError.of(ErrorCode.ACCESS_DENIED, e, request);
         return new ResponseEntity<>(error, error.getHttpStatus());
     }
 

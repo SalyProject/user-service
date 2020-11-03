@@ -9,10 +9,6 @@ public interface ApiErrorCode {
 
     String getMessage();
 
-    default String getDetails() {
-        return "";
-    }
-
     int getCode();
 
 }

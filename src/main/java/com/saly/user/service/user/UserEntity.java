@@ -1,8 +1,9 @@
-package com.saly.user;
+package com.saly.user.service.user;
 
 import com.saly.user.common.domain.AbstractEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Set;
@@ -20,6 +21,7 @@ import javax.persistence.Table;
 @Table(name = "saly_user")
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class UserEntity extends AbstractEntity<UserEntity> {
 
     @Column(name = "email")

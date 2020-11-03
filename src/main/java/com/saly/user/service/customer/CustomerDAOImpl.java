@@ -1,7 +1,10 @@
-package com.saly.user;
+package com.saly.user.service.customer;
 
+import com.saly.user.service.user.UserEntity;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+import java.util.UUID;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -25,5 +28,10 @@ public class CustomerDAOImpl implements CustomerDAO {
         entityManager.persist(customerEntity);
 
         return customerEntity;
+    }
+
+    @Override
+    public Optional<CustomerEntity> findById(UUID id) {
+        return Optional.ofNullable(entityManager.find(CustomerEntity.class, id));
     }
 }

@@ -1,4 +1,4 @@
-package com.saly.user;
+package com.saly.user.service.customer;
 
 import lombok.Data;
 

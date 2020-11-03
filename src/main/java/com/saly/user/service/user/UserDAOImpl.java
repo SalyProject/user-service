@@ -1,7 +1,8 @@
-package com.saly.user;
+package com.saly.user.service.user;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,5 +24,11 @@ public class UserDAOImpl implements UserDAO {
         entityManager.persist(userEntity);
 
         return userEntity;
+    }
+
+    @Override
+    public Optional<UserEntity> findByEmail(String email) {
+        return Optional.ofNullable(entityManager.createQuery("select u from UserEntity u where u.email = :email", UserEntity.class)
+                .setParameter("email", email).getSingleResult());
     }
 }
