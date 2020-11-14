@@ -1,6 +1,7 @@
-package com.saly.user.service.auth;
+package com.saly.user.service.user;
 
-import com.saly.user.service.user.UserRole;
+import com.saly.user.common.auth.SalyUserDetails;
+import com.saly.user.common.auth.UserRole;
 import lombok.Getter;
 
 import java.util.Set;

@@ -1,4 +1,4 @@
-package com.saly.user.service.auth;
+package com.saly.user.common.auth;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

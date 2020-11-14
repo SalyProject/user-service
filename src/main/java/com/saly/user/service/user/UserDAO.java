@@ -1,5 +1,7 @@
 package com.saly.user.service.user;
 
+import com.saly.user.common.auth.UserRole;
+
 import java.util.Optional;
 import java.util.Set;
 

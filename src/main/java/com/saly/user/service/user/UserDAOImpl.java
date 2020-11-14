@@ -1,5 +1,6 @@
 package com.saly.user.service.user;
 
+import com.saly.user.common.auth.UserRole;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

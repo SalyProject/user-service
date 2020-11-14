@@ -4,7 +4,7 @@ import static com.saly.user.common.exception.ValidationUtils.validateParam;
 
 import com.saly.user.service.user.UserDAO;
 import com.saly.user.service.user.UserEntity;
-import com.saly.user.service.user.UserRole;
+import com.saly.user.common.auth.UserRole;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

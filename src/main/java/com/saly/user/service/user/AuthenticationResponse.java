@@ -1,4 +1,4 @@
-package com.saly.user.service.auth;
+package com.saly.user.service.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -7,7 +7,7 @@ import static org.mockito.Mockito.when;
 
 import com.saly.user.service.user.UserDAO;
 import com.saly.user.service.user.UserEntity;
-import com.saly.user.service.user.UserRole;
+import com.saly.user.common.auth.UserRole;
 import com.saly.user.common.exception.BadRequestException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

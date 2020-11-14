@@ -1,6 +1,5 @@
-package com.saly.user.service.auth;
+package com.saly.user.common.auth;
 
-import com.saly.user.service.user.UserRole;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

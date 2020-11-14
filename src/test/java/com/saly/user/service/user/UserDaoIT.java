@@ -5,9 +5,7 @@ import static org.assertj.core.api.Assertions.within;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.saly.user.IntegrationTest;
-import com.saly.user.service.user.UserDAO;
-import com.saly.user.service.user.UserEntity;
-import com.saly.user.service.user.UserRole;
+import com.saly.user.common.auth.UserRole;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;

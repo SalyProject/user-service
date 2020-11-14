@@ -1,5 +1,6 @@
 package com.saly.user.service.user;
 
+import com.saly.user.common.auth.UserRole;
 import com.saly.user.common.domain.AbstractEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;

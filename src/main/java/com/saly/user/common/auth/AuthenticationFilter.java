@@ -1,7 +1,10 @@
-package com.saly.user.service.auth;
+package com.saly.user.common.auth;
 
 import static java.util.Optional.ofNullable;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.saly.user.common.utils.JwtUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -15,13 +18,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Slf4j
 public class AuthenticationFilter extends OncePerRequestFilter {
 
-    private final JwtTokenResolver jwtTokenResolver;
+    private final JwtUserDetailsFetcher jwtUserDetailsFetcher;
 
-    public AuthenticationFilter(JwtTokenResolver jwtTokenResolver) {
-        this.jwtTokenResolver = jwtTokenResolver;
+    public AuthenticationFilter(JwtUserDetailsFetcher jwtUserDetailsFetcher) {
+        this.jwtUserDetailsFetcher = jwtUserDetailsFetcher;
     }
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
@@ -29,13 +34,13 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 
        if (Objects.isNull(SecurityContextHolder.getContext().getAuthentication())) {
            fetchJwtToken(request)
-                   .filter(jwtTokenResolver::isTokenNotExpired)
-                   .flatMap(jwtTokenResolver::fetchUserDetails)
+                   .flatMap(jwtUserDetailsFetcher::fetchUserDetails)
                    .ifPresent(userDetails -> authenticate(request, userDetails));
        }
 
        chain.doFilter(request, response);
     }
+
 
     private void authenticate(final HttpServletRequest request, final SalyUserDetails userDetails) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(

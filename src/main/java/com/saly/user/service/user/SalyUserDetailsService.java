@@ -1,9 +1,8 @@
-package com.saly.user.service.auth;
+package com.saly.user.service.user;
 
+import com.saly.user.common.auth.SalyUserDetails;
 import com.saly.user.common.exception.NotFoundException;
-import com.saly.user.service.user.UserDAO;
-import com.saly.user.service.user.UserEntity;
-import com.saly.user.service.user.UserRole;
+import com.saly.user.common.auth.UserRole;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

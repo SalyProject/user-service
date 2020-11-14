@@ -11,6 +11,10 @@ public class SallyException extends HasError {
         this(new SallyErrorCode(message));
     }
 
+    public SallyException(String message, Throwable cause) {
+        super(new SallyErrorCode(message), null, cause);
+    }
+
     @Getter
     static class SallyErrorCode extends ErrorCodeAdapter {
         private String message;

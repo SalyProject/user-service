@@ -1,4 +1,4 @@
-package com.saly.user.service.auth;
+package com.saly.user.common.auth;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -7,7 +7,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.saly.user.AbstractWebMvcTest;
-import com.saly.user.service.user.UserRole;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -37,26 +36,12 @@ public class AuthFilterChainTest extends AbstractWebMvcTest {
     }
 
     @Test
-    void testWithExpiredToken() throws Exception {
-        final String expiredToken = "expiredToken";
-        final MockHttpServletRequestBuilder requestBuilder = get("/protected/api/authtest")
-                .header("Authorization", "Bearer " + expiredToken);
-
-        when(jwtTokenResolver.isTokenNotExpired(expiredToken)).thenReturn(false);
-
-        mockMvc.perform(requestBuilder)
-                .andDo(print())
-                .andExpect(status().isUnauthorized());
-    }
-
-    @Test
     void testWithInvalidToken() throws Exception {
         final String invalidToken = "invalidToken";
 
         final MockHttpServletRequestBuilder requestBuilder = get("/protected/api/authtest")
                 .header("Authorization", "Bearer " + invalidToken);
 
-        when(jwtTokenResolver.isTokenNotExpired(invalidToken)).thenReturn(true);
         when(jwtTokenResolver.fetchUserDetails(invalidToken)).thenReturn(Optional.empty());
 
         mockMvc.perform(requestBuilder)
@@ -71,7 +56,6 @@ public class AuthFilterChainTest extends AbstractWebMvcTest {
         final MockHttpServletRequestBuilder requestBuilder = get("/protected/api/authtest")
                 .header("Authorization", "Bearer " + token);
 
-        when(jwtTokenResolver.isTokenNotExpired(token)).thenReturn(true);
 
         final UUID userId = UUID.randomUUID();
         final String username = "username";
@@ -92,7 +76,6 @@ public class AuthFilterChainTest extends AbstractWebMvcTest {
         final MockHttpServletRequestBuilder requestBuilder = get("/protected/api/authtest/customer")
                 .header("Authorization", "Bearer " + token);
 
-        when(jwtTokenResolver.isTokenNotExpired(token)).thenReturn(true);
 
         final UUID userId = UUID.randomUUID();
         final String username = "username";
@@ -112,7 +95,6 @@ public class AuthFilterChainTest extends AbstractWebMvcTest {
         final MockHttpServletRequestBuilder requestBuilder = get("/protected/api/authtest/customer")
                 .header("Authorization", "Bearer " + token);
 
-        when(jwtTokenResolver.isTokenNotExpired(token)).thenReturn(true);
 
         final UUID userId = UUID.randomUUID();
         final String username = "username";

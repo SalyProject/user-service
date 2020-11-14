@@ -1,5 +1,4 @@
-package com.saly.user.service.auth;
-import com.saly.user.service.user.Roles;
+package com.saly.user.common.auth;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
