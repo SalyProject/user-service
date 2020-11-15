@@ -35,4 +35,11 @@ class JwtUtilTest {
         // VERIFY
         assertThat(result).isEmpty();
     }
+
+    @Test
+    void testGenerateTokenFail() {
+        final Optional<String> result = JwtUtil.generateToken(null, -3L, null);
+
+        assertThat(result).isEmpty();
+    }
 }
