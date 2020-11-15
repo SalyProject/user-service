@@ -1,5 +1,6 @@
 package com.saly.user.service.customer;
 
+import com.saly.user.common.domain.CommonDAO;
 import com.saly.user.service.user.UserEntity;
 import org.springframework.stereotype.Repository;
 
@@ -9,13 +10,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 @Repository
-public class CustomerDAOImpl implements CustomerDAO {
-
-    @PersistenceContext
-    private final EntityManager entityManager;
+public class CustomerDAOImpl extends CommonDAO implements CustomerDAO {
 
     public CustomerDAOImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
+        super(entityManager);
     }
 
     @Override

@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -48,5 +49,50 @@ public class UserDaoIT extends IntegrationTest {
         assertThat(savedEntity.getRoles()).contains(UserRole.CUSTOMER);
         assertThat(savedEntity.getCreatedAt()).isCloseTo(LocalDateTime.now(), within(10, ChronoUnit.SECONDS));
         assertThat(savedEntity.getUpdatedAt()).isCloseTo(LocalDateTime.now(), within(10, ChronoUnit.SECONDS));
+    }
+
+    @Test
+    void testFindUserByEmailSuccess() {
+        // SETUP
+        final String searchedEmail = "searchedEmail";
+
+        prepareUserEntity("email1", "pass");
+        prepareUserEntity("email3", "pass");
+        final UserEntity searchedUserEntity = prepareUserEntity(searchedEmail, "pass");
+
+        entityManager.flush();
+
+        // ACT
+        final Optional<UserEntity> result = userDAO.findByEmail(searchedEmail);
+
+        // VERIFY
+        assertThat(result).contains(searchedUserEntity);
+    }
+
+    @Test
+    void testFindUserByEmailNotFound() {
+        // SETUP
+        final String searchedEmail = "notExistedEmail";
+
+        prepareUserEntity("email1", "pass");
+        prepareUserEntity("email3", "pass");
+
+        entityManager.flush();
+
+        // ACT
+        final Optional<UserEntity> result = userDAO.findByEmail(searchedEmail);
+
+        // VERIFY
+        assertThat(result).isEmpty();
+    }
+
+    private UserEntity prepareUserEntity(String email, String pass) {
+        final UserEntity userEntity = new UserEntity();
+        userEntity.setEmail(email);
+        userEntity.setPassword(pass);
+
+        entityManager.persist(userEntity);
+
+        return userEntity;
     }
 }
