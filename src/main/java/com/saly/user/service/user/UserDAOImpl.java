@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 import java.util.Set;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 
 @Repository
 public class UserDAOImpl extends CommonDAO implements UserDAO {
@@ -27,11 +26,7 @@ public class UserDAOImpl extends CommonDAO implements UserDAO {
 
     @Override
     public Optional<UserEntity> findByEmail(String email) {
-        try {
-            return findSingleResult(entityManager.createQuery("select u from UserEntity u where u.email = :email", UserEntity.class)
-                    .setParameter("email", email));
-        } catch (NoResultException e) {
-            return Optional.empty();
-        }
+        return findSingleResult(entityManager.createQuery("select u from UserEntity u where u.email = :email", UserEntity.class)
+                .setParameter("email", email));
     }
 }
